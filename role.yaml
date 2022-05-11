@@ -7,7 +7,15 @@ rules:
 - apiGroups: [""]
   resources: ["namespaces", "serviceaccounts"]
   verbs: ["*"]
-
+- apiGroups: ["triggers.tekton.dev"]
+  resources: ["clustertriggerbindings", "clusterinterceptors", "eventlisteners", "triggerbindings", "triggertemplates", "triggers", "eventlisteners/finalizers"]
+  verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]
+- apiGroups: ["rbac.authorization.k8s.io"]
+  resources: ["clusterroles", "clusterrolebindings", "roles", "rolebindings"]
+  verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]  
 ---
 
 apiVersion: rbac.authorization.k8s.io/v1
