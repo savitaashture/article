@@ -5,7 +5,7 @@ metadata:
   name: ns-role
 rules:
 - apiGroups: [""]
-  resources: ["namespaces"]
+  resources: ["namespaces", "serviceaccounts"]
   verbs: ["*"]
 
 ---
