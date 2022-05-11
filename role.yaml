@@ -13,9 +13,12 @@ rules:
 - apiGroups: [""]
   resources: ["pods"]
   verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]
-- apiGroups: ["rbac.authorization.k8s.io"]
+- apiGroups: [""]
   resources: ["clusterroles", "clusterrolebindings", "roles", "rolebindings"]
-  verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]  
+  verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]
+- apiGroups: [""]
+  resources: ["services", "configmaps", "secrets"]
+  verbs: ["get", "list", "watch"]
 ---
 
 apiVersion: rbac.authorization.k8s.io/v1
