@@ -819,7 +819,7 @@ spec:
         - name: RUN_AS
           value: $(params.RUN_AS)
       runAfter:
-        - install-serverless-operator
+        - metrics-tests
       taskRef:
         kind: Task
         name: upstream-triggers-e2e-tests
