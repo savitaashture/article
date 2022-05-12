@@ -9,7 +9,7 @@ rules:
   verbs: ["*"]
 - apiGroups: ["triggers.tekton.dev"]
   resources: ["clustertriggerbindings", "clusterinterceptors", "eventlisteners", "triggerbindings", "triggertemplates", "triggers", "eventlisteners/finalizers"]
-  verbs: ["get", "list", "watch"]
+  verbs: ["get", "list", "watch", "create", "delete"]
 - apiGroups: [""]
   resources: ["pods", "pods/portforward", "pods/log", "events"]
   verbs: ["*"]
