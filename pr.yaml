@@ -1,0 +1,72 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: acceptance-tests-savita-17-on-410-psi-allinone-
+spec:
+  pipelineRef:
+    name: acceptance-tests-savita
+  timeout: 3h
+  params:
+    - name: ARCH
+      value: "linux/amd64"
+    - name: CATALOG_SOURCE
+      value: redhat-operators
+    - name: CATALOG_TESTS_BRANCH
+      value: release-1.7
+    - name: CLI_TESTS_BRANCH
+      value: release-v0.23.1
+    - name: CLI_TESTS_TYPE
+      value: downstream
+    - name: CLUSTER_NAME
+      value: sa1017
+    - name: CHANNEL
+      value: pipelines-1.7
+    - name: IS_DISCONNECTED
+      value: "false"
+    - name: IMAGE
+      value: quay.io/openshift-pipeline/ci:v1.7
+    - name: INDEX
+      value: ""
+    - name: KEEP_CLUSTER
+      value: "false"
+    - name: LAUNCHER_VARS
+      value: >-
+        {
+        "os_ext_network":"provider_net_cci_12",
+        "bootstrap_in_place":"yes",
+        "dns_solution":"route53_AWS-PSI",
+        "num_workers":0,
+        "num_masters":1,
+        "master_worker_AllInOne":"true",
+        "vm_type":"ci.standard.xxxl",
+        "vm_type_workers":"ci.m4.xlarge"
+        }
+    - name: OPENSHIFT_VERSION
+      value: fast-4.10
+    - name: OPERATOR_ENVIRONMENT
+      value: prod
+    - name: RELEASE_TESTS_BRANCH
+      value: release-v1.7
+    - name: TEMPLATE
+      value: private-templates/functionality-testing/aos-4_10/ipi-on-osp/versioned-installer
+    - name: TKN_DOWNLOAD_URL
+      value: https://mirror.openshift.com/pub/openshift-v4/clients/pipeline/latest/tkn-linux-amd64-0.23.1.tar.gz
+      # value: http://download.eng.bos.redhat.com/staging-cds/developer/openshift-pipelines-client/0.23.1-1423/signed/linux/tkn-linux-amd64-0.23.1.tar.gz
+    - name: TUTORIAL_BRANCH
+      value: pipelines-1.7
+  workspaces:
+    - name: install-dir
+      persistentVolumeClaim:
+        claimName: install-dir
+    - name: git
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteMany
+          resources:
+            requests:
+              storage: 200Mi
+          storageClassName: csi-manila-ceph
+    - name: flexy-secrets
+      secret:
+        secretName: flexy
