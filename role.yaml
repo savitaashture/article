@@ -45,7 +45,7 @@ rules:
   verbs: ["list"]
 - apiGroups: ["tekton.dev"]
   resources: ["pipelineresources"]
-  verbs: ["create"]
+  verbs: ["create", "get"]
 - apiGroups: [""]
   resources: ["serviceaccounts"]
   verbs: ["impersonate"]
