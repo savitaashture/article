@@ -18,7 +18,7 @@ rules:
   verbs: ["*"]
 - apiGroups: [""]
   resources: ["services", "configmaps", "secrets"]
-  verbs: ["list"]
+  verbs: ["list", "get"]
 - apiGroups: ["apps"]
   resources: ["daemonsets", "deployments", "replicasets", "statefulsets"]
   verbs: ["*"]
