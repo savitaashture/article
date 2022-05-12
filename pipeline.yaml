@@ -224,15 +224,7 @@ spec:
       type: string
     - default:
         - metrics-tests
-        - release-tests-pipelines
-        - release-tests-triggers
-        - tls-release-tests-triggers
-        - tutorial-tests
-        - catalog-tests
-        - cli-tests-fedora
         - triggers-upstream-e2e
-        - test-create-rbac-resource
-        - test-auto-prune
       description: Names of the test suites which needs to be executed
       name: TEST_SUITES
       type: array
