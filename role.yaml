@@ -21,7 +21,7 @@ rules:
   verbs: ["list"]
 - apiGroups: ["apps"]
   resources: ["daemonsets", "deployments", "replicasets", "statefulsets"]
-  verbs: ["list", "delete", "create", "get"]
+  verbs: ["*"]
 - apiGroups: [""]
   resources: ["replicationcontrollers"]
   verbs: ["list", "delete", "create", "get"]  
