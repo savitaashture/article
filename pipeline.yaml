@@ -114,8 +114,8 @@ spec:
         - input: $(params.IS_INTEROP)
           operator: in
           values:
-            - "True"
-            - "true"
+            - 'True'
+            - 'true'
       workspaces:
         - name: plumbing-git
           subPath: plumbing-git
