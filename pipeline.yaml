@@ -35,8 +35,8 @@ spec:
         - input: $(params.KEEP_CLUSTER)
           operator: notin
           values:
-            - 'True'
-            - 'true'
+            - "True"
+            - "true"
       workspaces:
         - name: install-dir
           workspace: install-dir
