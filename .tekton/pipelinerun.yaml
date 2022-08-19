@@ -9,7 +9,7 @@ metadata:
     pipelinesascode.tekton.dev/on-event: "[pull_request, push]"
 
     # The branch or tag we are targeting (ie: main, refs/tags/*)
-    pipelinesascode.tekton.dev/on-target-branch: "main"
+    pipelinesascode.tekton.dev/on-target-branch: "gh-test-1"
     
     # Fetch the git-clone task from hub, we are able to reference later on it
     # with taskRef and it will automatically be embedded into our pipeline.
@@ -22,8 +22,6 @@ metadata:
 
     # How many runs we want to keep attached to this event
     pipelinesascode.tekton.dev/max-keep-runs: "4"
-    pipelinesascode.tekton.dev/on-cel-expression: |
-      event == "push" && target_branch == "refs/heads/main" && ".tekton".pathChanged()
 spec:
   params:
     # The variable with brackets are special to Pipelines as Code
