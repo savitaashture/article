@@ -20,7 +20,7 @@ metadata:
     # example:
     # pipelinesascode.tekton.dev/task-2: "[maven, buildah]"
 
-    # How many runs we want to keep attached to this event
+    # How many runs we want to keep attached to this event3333
     pipelinesascode.tekton.dev/max-keep-runs: "5"
 spec:
   params:
