@@ -51,7 +51,7 @@ spec:
             value: $(params.repo_url)
           - name: revision
             value: $(params.revision)
-      # Customize this task if you like, or just do a taskRef
+      # Customize this task if you like, or just do a taskRef added comment
       # to one of the hub task.
       - name: noop-task
         runAfter:
