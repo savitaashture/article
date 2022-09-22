@@ -2,7 +2,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: "pipelinerun"
+  name: "pipelinerun-clone"
   annotations:
     pipelinesascode.tekton.dev/target-namespace: "pac-e2e-ns-zq5qk"
     pipelinesascode.tekton.dev/on-target-branch: "[main]"
