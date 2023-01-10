@@ -4,8 +4,8 @@ kind: PipelineRun
 metadata:
   name: "pr-clone"
   annotations:
-    pipelinesascode.tekton.dev/target-namespace: "pac-e2e-ns-htpl2"
-    pipelinesascode.tekton.dev/on-target-branch: "[pac-e2e-ns-htpl2]"
+    pipelinesascode.tekton.dev/target-namespace: "pac-e2e-ns-5lz67"
+    pipelinesascode.tekton.dev/on-target-branch: "[pac-e2e-ns-5lz67]"
     pipelinesascode.tekton.dev/on-event: "[incoming]"
 spec:
   pipelineSpec:
