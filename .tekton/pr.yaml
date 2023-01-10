@@ -2,7 +2,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: "pr-clone"
+  name: "pr"
   annotations:
     pipelinesascode.tekton.dev/target-namespace: "pac-e2e-ns-4zr8t"
     pipelinesascode.tekton.dev/on-target-branch: "[pac-e2e-ns-4zr8t]"
