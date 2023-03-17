@@ -1,16 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: article
-  description: |
-    Backstage is an open-source developer portal that puts the developer experience first.
-  links:
-    - title: Website
-      url: http://backstage.io
-  annotations:
-    github.com/project-slug: savitaashture/article
-    backstage.io/techdocs-ref: dir:.
-    lighthouse.com/website-url: https://backstage.io
+  name: article-backstage
+  description: An example of a Backstage application.
+  # Example for optional annotations
+  # annotations:
+  #   github.com/project-slug: backstage/backstage
+  #   backstage.io/techdocs-ref: dir:.
 spec:
   type: website
   owner: savita@example.com
