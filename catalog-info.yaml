@@ -12,6 +12,6 @@ metadata:
     backstage.io/techdocs-ref: dir:.
     lighthouse.com/website-url: https://backstage.io
 spec:
-  type: library
-  owner: backstage
+  type: website
+  owner: savita@example.com
   lifecycle: experimental
