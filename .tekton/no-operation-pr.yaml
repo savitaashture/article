@@ -27,7 +27,7 @@ metadata:
     # How many runs we want to keep.
     pipelinesascode.tekton.dev/max-keep-runs: "5"
     pipelinesascode.tekton.dev/on-cel-expression: |
-      event == "pull_request" && target_branch == "main" && "frontend/*.txt".pathChanged()    
+      event == "pull_request" && target_branch == "main" && "frontend/***".pathChanged()    
 spec:
   pipelineSpec:
     tasks:
