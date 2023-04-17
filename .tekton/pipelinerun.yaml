@@ -13,7 +13,7 @@ metadata:
 
     # Fetch the git-clone task from hub, we are able to reference later on it
     # with taskRef and it will automatically be embedded into our pipeline.
-    pipelinesascode.tekton.dev/task: "https://github.com/savitaashture/pacaccess/blob/main/clone.yaml"
+    pipelinesascode.tekton.dev/task: "https://raw.githubusercontent.com/savitaashture/pacaccess/main/clone.yaml?token=GHSAT0AAAAAABLBVVQS6FKNRPX3DIBRS2TMZB5N6KQ"
 
     # Use maven task from hub
     #
