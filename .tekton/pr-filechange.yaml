@@ -23,7 +23,7 @@ spec:
         taskSpec:
           steps:
             - name: noop-task
-              image: registry.access.redhat.com/ubi9/ubi-micro
+              image: ubuntu
               script: |
                 echo "{{ company }}"
                 exit 0
