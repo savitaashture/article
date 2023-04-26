@@ -26,6 +26,5 @@ spec:
               image: ubuntu
               script: |
                 #! /bin/bash
-                echo "test"
                 echo {{ company }}
                 exit 0
