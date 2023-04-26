@@ -25,5 +25,6 @@ spec:
             - name: noop-task
               image: ubuntu
               script: |
-                echo "{{ company }}"
+                echo "test"
+                echo {{ company }}
                 exit 0
