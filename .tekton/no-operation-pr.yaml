@@ -30,7 +30,20 @@ metadata:
     # pipelinesascode.tekton.dev/on-cel-expression: |
       # event == "push" && target_branch == "main" && "frontend/***".pathChanged()
 spec:
+  params:
+    # The variable with brackets are special to Pipelines as Code
+    # They will automatically be expanded with the events from Github.
+    - name: repo_url
+      value: "{{ repo_url }}"
+    - name: event_data
+      value: "{{ event_type }}"      
+    - name: revision
+      value: "{{ revision }}"
   pipelineSpec:
+    params:
+      - name: repo_url
+      - name: revision
+      - name: event_data
     tasks:
       # Customize this task if you like, or just do a taskRef
       # to one of the hub task.
@@ -40,4 +53,9 @@ spec:
             - name: noop-task
               image: registry.access.redhat.com/ubi9/ubi-micro
               script: |
+                echo "**********************"
+                echo $(params.repo_url)
+                echo "**********************"
+                echo $(params.event_data)
+                echo "**********************"
                 exit 0
