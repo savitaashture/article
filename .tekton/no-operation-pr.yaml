@@ -40,4 +40,5 @@ spec:
             - name: noop-task
               image: registry.access.redhat.com/ubi9/ubi-micro
               script: |
+                sleep 30
                 exit 0
