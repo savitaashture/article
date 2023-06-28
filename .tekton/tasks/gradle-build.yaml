@@ -1,0 +1,43 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: astro-gradle-build
+  labels:
+    app: astro-spring-image
+spec:
+  results:
+    - name: JARFILE
+  # params:
+    
+  #   - name: PARAM_SUBDIRECTORY
+  #     value: $(params.subdirectory)
+  #     default: 'astronomer'
+  steps:
+  - image: registry.ford.com/dcs/jdk11:latest
+    env:
+    - name: WORKSPACE_OUTPUT_PATH
+      value: $(workspaces.output.path)
+    name: build-test
+    script: |
+      ls -l
+      cd astronomer
+      ./gradlew clean build --stacktrace
+      ls
+      echo "------"
+      ls build/libs
+      cd ..
+      ls
+      # CHECKOUT_DIR="${WORKSPACE_OUTPUT_PATH}"
+      # cp ./astronomer-0.0.1-SNAPSHOT.jar ${WORKSPACE_OUTPUT_PATH}
+      # ls ${WORKSPACE_OUTPUT_PATH}
+    workingDir: $(workspaces.output.path)
+    resources:
+      requests:
+        memory: 4Gi
+        cpu: 2
+      limits:
+        memory: 4Gi
+        cpu: 2
+  workspaces:
+    - name: output
+      description: The git repo will be cloned onto the volume backing this Workspace.
