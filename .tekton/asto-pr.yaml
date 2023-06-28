@@ -8,7 +8,7 @@ metadata:
     # pipelinesascode.tekton.dev/pipeline: "[.tekton/pipeline/pipeline.yaml]"
     pipelinesascode.tekton.dev/task: "[.tekton/tasks/get-env-spring.yaml, .tekton/tasks/gradle-build.yaml]"
 ​
-    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && (target_branch == "main" || target_branch == "master" || target_branch == "preprod" || target_branch == "dev") && "astronomer/*".pathChanged()
+    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && (target_branch == "main" || target_branch == "master" || target_branch == "preprod" || target_branch == "dev")
 ​
 spec:
   params:
@@ -70,7 +70,7 @@ spec:
       retries: 3
       taskRef:
         kind: ClusterTask
-        name: git-clone-ford
+        name: git-clone
       workspaces:
       - name: output
         workspace: clone-workspace
