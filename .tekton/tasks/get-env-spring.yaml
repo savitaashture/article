@@ -1,0 +1,111 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: get-env-springboot
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.22.0"
+    tekton.dev/tags: python
+    tekton.dev/categories: Github
+    tekton.dev/displayName: Git Change Detector
+spec:
+  description: >-
+    Returns the computing environment name that has changed
+  params:
+​
+    - name: TASK_IMAGE
+      description: Container image to run the steps of this task in
+      type: string
+      default: registry.ford.com/cloudtooling/python
+​
+    - name: FAIL_WITH_MULTI_CHANGE
+      description: When set to true, the task will fail when more than one computing environment has changed. If false, it will throw a warning and try its best t choose the lowest tier environment i.e. dev instead of prod
+      type: string
+      default: "true"
+​
+    - name: JSON_FILE_NAME
+      description: The name of the json file that will be created that will contain all the changed files. This is only created when the 'output' workspace has been supplied
+      type: string
+      default: changed_files.json
+    
+    - name: GIT_REF
+      description: The github base brach
+      type: string
+​
+  workspaces:
+    - name: output
+      description: Contains a json file of changed files
+​
+  results:
+    - name: ENVIRONMENT
+      description: The name of the environment that has changed
+​
+    - name: HAS_CHANGED_ENV
+      description: True or false whether or not a computing environment has changed
+    
+    - name: IMAGE_VERSION
+      description: The name of the workspace in environment that has changed
+    
+    - name: IMAGE
+      description: The name of the workspace in environment that has changed
+    
+    - name: SECRET
+      description: The name of the deployment in environment that has changed
+    
+    - name: GCP_PROJECT
+      description: The name of the deployment in environment that has changed
+​
+    # - name: MESSAGE
+    #   description: The name of the deployment in environment that has changed
+​
+​
+  steps:    
+    - name: get-details
+      image: $(params.TASK_IMAGE)
+      imagePullPolicy: IfNotPresent
+      workingDir: "$(workspaces.output.path)"
+      script: |
+        #!/usr/bin/env python3
+        import json, re
+        environment = '$(params.GIT_REF)'.split('/')[2]
+        if environment == "main" or environment == "master":
+            environment = "prod"
+        f = open("./astronomer/pipeline.json")
+        data = json.load(f)
+        data1=data['data']   
+        if environment=="dev":
+            IMAGE=data1['dev']['tag']
+            IMAGE_VERSION=data1['dev']['tag-version'] 
+            GCP_PROJECT=data1['dev']['project']
+        elif environment=="preprod":
+            IMAGE=data1['preprod']['tag']
+            IMAGE_VERSION=data1['preprod']['tag-version'] 
+            GCP_PROJECT=data1['preprod']['project']
+        elif environment=="prod":
+            IMAGE=data1['prod']['tag']
+            IMAGE_VERSION=data1['prod']['tag-version'] 
+            GCP_PROJECT=data1['prod']['project']
+        else:
+            IMAGE=""
+            IMAGE_VERSION=""
+            GCP_PROJECT=""
+        # if environment == "dev":
+        #   environment = "preprod"
+        print(f"Environment: {environment}")
+        print("Image = ",IMAGE)
+        print("tag_verison = ",IMAGE_VERSION)
+        print("gcp_project = ",GCP_PROJECT)
+         
+        f = open("$(results.ENVIRONMENT.path)", "a")
+        f.write(environment)
+        f.close()
+        f = open("$(results.IMAGE_VERSION.path)", "a")
+        f.write(IMAGE_VERSION)
+        f.close()
+        f = open("$(results.IMAGE.path)", "a")
+        f.write(IMAGE)
+        f.close()
+        f = open("$(results.GCP_PROJECT.path)", "a")
+        f.write(GCP_PROJECT)
+        f.close()
