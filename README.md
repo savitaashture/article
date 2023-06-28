@@ -1,1 +1,1 @@
-# article demott
+# article demot
