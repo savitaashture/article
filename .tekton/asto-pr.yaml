@@ -1,0 +1,117 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: astro-spring-boot-pr
+  annotations:
+​
+    pipelinesascode.tekton.dev/max-keep-runs: "5"
+    # pipelinesascode.tekton.dev/pipeline: "[.tekton/pipeline/pipeline.yaml]"
+    pipelinesascode.tekton.dev/task: "[.tekton/tasks/get-env-spring.yaml, .tekton/tasks/gradle-build.yaml]"
+​
+    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && (target_branch == "main" || target_branch == "master" || target_branch == "preprod" || target_branch == "dev") && "astronomer/*".pathChanged()
+​
+spec:
+  params:
+    # The variable with brackets are special to Pipelines as Code
+    # They will automatically be expanded with the events from Github.
+    - name: GIT_CLONE_URL # replace git_ssh_url and git_clone_url
+      value: "{{ repo_url }}"
+    - name: GIT_HEAD_SHA #head sha
+      value: "{{ revision }}"
+    - name: GIT_OWNER
+      value: "{{ repo_owner }}"
+    - name: GIT_REPOSITORY #GIT_REPOSITORY
+      value: "{{ repo_name}}"
+    - name: GIT_USER
+      value: "{{ sender }}"
+    - name: GIT_SOURCE_BRANCH
+      value: "{{ source_branch }}"
+    - name: GIT_REF
+      value: "refs/heads/{{ target_branch }}"
+    - name: GIT_PR_NUMBER
+      value: "{{ pull_request_number }}"
+    - name: GIT_EVENT
+      value: "{{ event_type }}"
+    - name: GIT_ORGANIZATION
+      value: supendhr
+  pipelineSpec:
+    params:
+    - name: GIT_CLONE_URL # replace git_ssh_url and git_clone_url
+    - name: GIT_HEAD_SHA #head sha
+    - name: GIT_OWNER
+    - name: GIT_REPOSITORY #GIT_REPOSITORY
+    - name: GIT_USER
+    - name: GIT_SOURCE_BRANCH
+    - name: GIT_REF
+    - name: GIT_PR_NUMBER
+    - name: GIT_ORGANIZATION
+    workspaces:
+      - name: clone-workspace
+      - name: basic-auth
+    tasks:      
+    - name: clone-source
+      params:
+      - name: url
+        value: $(params.GIT_CLONE_URL)
+      - name: revision
+        value: $(params.GIT_HEAD_SHA)
+      - name: submodules
+        value: "true"
+      - name: depth
+        value: "1"
+      - name: sslVerify
+        value: "true"
+      - name: deleteExisting
+        value: "true"
+      - name: verbose
+        value: "true"
+      - name: userHome
+        value: /tekton/home
+      retries: 3
+      taskRef:
+        kind: ClusterTask
+        name: git-clone-ford
+      workspaces:
+      - name: output
+        workspace: clone-workspace
+      - name: basic-auth
+        workspace: basic-auth
+​
+    - name: get-push-variables
+      params:
+      - name: GIT_REF
+        value: $(params.GIT_REF)
+      runAfter:
+      - clone-source
+      taskRef:
+        kind: Task
+        name: get-env-springboot
+      workspaces:
+      - name: output
+        workspace: clone-workspace
+​
+    - name: gradle-build
+      runAfter:
+      - get-push-variables
+      taskRef:
+        kind: Task
+        name: astro-gradle-build
+      workspaces:
+      - name: output
+        workspace: clone-workspace
+​
+  serviceAccountName: pipeline
+  workspaces:
+  - name: clone-workspace
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 500Mi
+        storageClassName: px-repl2-block
+  # This workspace will inject secret to help the git-clone task to be able to
+  # checkout the private repositories
+  - name: basic-auth
+    secret:
