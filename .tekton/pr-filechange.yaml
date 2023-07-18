@@ -12,20 +12,15 @@ metadata:
     # pipelinesascode.tekton.dev/on-cel-expression: |
       # event == "pull_request" && target_branch == "main" && "frontend/***".pathChanged()
 spec:
-  params:
-    - name: repo_url
-      value: "{{ repo_url }}"
-    - name: revision
-      value: "{{ revision }}"
   pipelineSpec:
     tasks:
+      # Customize this task if you like, or just do a taskRef
+      # to one of the hub task.
       - name: noop-task
         taskSpec:
           steps:
             - name: noop-task
-              image: ubuntu
+              image: registry.access.redhat.com/ubi9/ubi-micro
               script: |
-                #! /bin/bash
-                echo {{ company }}
                 sleep 30
                 exit 0
