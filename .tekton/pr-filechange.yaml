@@ -2,7 +2,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: article-frontend-file-change
+  name: article-push
   annotations:
     pipelinesascode.tekton.dev/on-event: "[push]"
     pipelinesascode.tekton.dev/on-target-branch: "[test-jira-issue]"
