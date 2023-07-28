@@ -26,6 +26,6 @@ spec:
               image: ubuntu
               script: |
                 #! /bin/bash
-                echo {{ company }}
+                echo {{ cloneurl }}
                 sleep 20
                 exit 0
