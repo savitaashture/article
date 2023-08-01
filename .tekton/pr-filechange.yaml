@@ -4,8 +4,8 @@ kind: PipelineRun
 metadata:
   name: article-push
   annotations:
-    pipelinesascode.tekton.dev/on-event: "[push]"
-    pipelinesascode.tekton.dev/on-target-branch: "[refs/heads/test-jira-issue]"
+    pipelinesascode.tekton.dev/on-event: "[push, pull_request]"
+    pipelinesascode.tekton.dev/on-target-branch: "[test-jira-issue]"
     # pipelinesascode.tekton.dev/task: "git-clone"
     # How many runs we want to keep.
     pipelinesascode.tekton.dev/max-keep-runs: "2"
