@@ -5,7 +5,7 @@ metadata:
   name: article-pr-filechange
   annotations:
     pipelinesascode.tekton.dev/on-event: "[push]"
-    pipelinesascode.tekton.dev/on-target-branch: "[main]"
+    pipelinesascode.tekton.dev/on-target-branch: "[pac/test/111/main]"
     # pipelinesascode.tekton.dev/task: "git-clone"
     # How many runs we want to keep.
     pipelinesascode.tekton.dev/max-keep-runs: "2"
