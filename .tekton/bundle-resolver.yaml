@@ -1,56 +1,28 @@
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: git-resovler-buildpacks-ws-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 500Mi
----
-apiVersion: tekton.dev/v1
+apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  generateName: git-resolver-
+  name: release-service-pull-request
   annotations:
-    # The event we are targeting as seen from the webhook payload
-    # this can be an array too, i.e: [pull_request, push]
     pipelinesascode.tekton.dev/on-event: "[pull_request]"
-    # pipelinesascode.tekton.dev/on-event: "[incoming]"
-
-    # The branch or tag we are targeting (ie: main, refs/tags/*)
     pipelinesascode.tekton.dev/on-target-branch: "[main]"
-    
     pipelinesascode.tekton.dev/max-keep-runs: "5"
 spec:
+  params: 
+    - name: git-url
+      value: "{{ repo_url }}"
+    - name: revision
+      value: "{{ revision }}"
+    - name: output-image
+      value: 'quay.io/redhat-appstudio/pull-request-builds:release-service-{{ revision }}'
   pipelineRef:
-    resolver: bundles
-    params:
-      - name: url
-        value: https://github.com/tektoncd/catalog.git
-      - name: revision
-        value: main
-      - name: pathInRepo
-        value: pipeline/buildpacks/0.2/buildpacks.yaml
-  params:
-    - name: BUILDER_IMAGE
-      value: docker.io/cnbs/sample-builder:bionic@sha256:6c03dd604503b59820fd15adbc65c0a077a47e31d404a3dcad190f3179e920b5
-    - name: TRUST_BUILDER
-      value: "false"
-    - name: APP_IMAGE
-      value: localhost:5000/buildpacks-app
-    - name: SOURCE_URL
-      value: https://github.com/buildpacks/samples
-    - name: SOURCE_SUBPATH
-      value: apps/ruby-bundler
+    name: docker-build
+    bundle: quay.io/redhat-appstudio-tekton-catalog/pipeline-core-services-docker-build:latest
   workspaces:
-    - name: source-ws
-      subPath: source
-      persistentVolumeClaim:
-        claimName: git-resolver-buildpacks-ws-pvc
-    - name: cache-ws
-      subPath: cache
-      persistentVolumeClaim:
-        claimName: git-resolver-buildpacks-ws-pvc
+    - name: workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi      
