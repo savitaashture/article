@@ -3,10 +3,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: git-resovler-buildpacks-ws-pvc
-  annotations:
-    pipelinesascode.tekton.dev/on-event: "[pull_request]"
-    pipelinesascode.tekton.dev/on-target-branch: "[main]"
-    pipelinesascode.tekton.dev/max-keep-runs: "5"
 spec:
   accessModes:
     - ReadWriteOnce
@@ -18,6 +14,10 @@ apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   generateName: git-resolver-
+  annotations:
+    pipelinesascode.tekton.dev/on-event: "[pull_request]"
+    pipelinesascode.tekton.dev/on-target-branch: "[main]"
+    pipelinesascode.tekton.dev/max-keep-runs: "5"
 spec:
   pipelineRef:
     resolver: bundles
