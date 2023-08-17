@@ -43,4 +43,4 @@ spec:
               script: |
                 echo {{ company }}
                 # sleep 31
-                exit 0
+                exit 1
