@@ -31,7 +31,7 @@ metadata:
     # pipelinesascode.tekton.dev/on-cel-expression: |
       # event == "push" && target_branch == "main" && "frontend/***".pathChanged()
 spec:
-  pipelineSpec:
+  `pipelineSpec:
     tasks:
       # Customize this task if you like, or just do a taskRef
       # to one of the hub task.
