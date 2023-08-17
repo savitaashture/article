@@ -1,6 +1,6 @@
 ---
 apiVersion: tekton.dev/v1beta1
-kind: PipelineRun11
+kind: PipelineRun
 metadata:
   name: article-no-operation
   annotations:
