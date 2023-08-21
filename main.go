@@ -2,10 +2,10 @@ package main
 
 import "fmt"
 
-const unused = `unusedstr`
+// const unused = `unusedstr`
 
 func main() {
-  a := 10
+  // a := 10
 
   fmt.Print("hello")  
 }
