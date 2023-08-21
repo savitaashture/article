@@ -7,5 +7,5 @@ const unused = `unusedstr`
 func main() {
   a := 10
 
-  fmt.Print("hello")  
+  fmt.Print("hello1")  
 }
