@@ -65,6 +65,6 @@ spec:
                 echo $(params.repo_url)
                 echo $(params.source_branch)
                 echo $(params.target_branch) 
-                echo $(params.source_repo_url)                                
+                echo $(params.source_url)                                
                 # sleep 30
                 exit 0
