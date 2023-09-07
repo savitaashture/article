@@ -1,0 +1,29 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: scratchmyback-params-test
+  annotations:
+    pipelinesascode.tekton.dev/on-event: "[pull_request, push]"
+    pipelinesascode.tekton.dev/on-target-branch: "[main]"
+    pipelinesascode.tekton.dev/max-keep-runs: "2"
+    # pipelinesascode.tekton.dev/task: "https://github.com/chmouel/scratchmyback/blob/chmouel/foobar/.tekton/remotetask.yaml"
+spec:
+  params:
+    - name: repo_url
+      value: "{{ repo_url }}"
+    - name: revision
+      value: "{{ revision }}"
+  pipelineSpec:
+    tasks:
+      - name: noop-task
+        taskSpec:
+          steps:
+            - name: noop-task
+              image: registry.access.redhat.com/ubi9/ubi-micro
+              script: |
+                echo {{ company }}
+                echo $(params.revision)
+                echo $(params.repo_url)
+                # sleep 30
+                exit 0
