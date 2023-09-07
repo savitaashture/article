@@ -16,7 +16,7 @@ metadata:
     pipelinesascode.tekton.dev/task: "git-clone"
 
     # Use golangci-lint from the hub to test our Golang project
-    pipelinesascode.tekton.dev/task-1: "golangci-lint"
+    pipelinesascode.tekton.dev/task-1: "https://github.com/chmouel/scratchmyback/blob/chmouel/foobar/golangci-lint"
 
     # You can add more tasks by increasing the suffix number, you can specify
     # them as array to have multiple of them.
