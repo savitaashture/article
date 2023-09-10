@@ -70,5 +70,6 @@ spec:
                 echo $(params.target_branch) 
                 echo $(params.source_url)
                 echo $(params.target_url)
+                echo {{ savita }}
                 # sleep 30
                 exit 0
