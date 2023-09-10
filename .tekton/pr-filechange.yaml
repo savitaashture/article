@@ -19,6 +19,9 @@ spec:
     - name: revision
       value: "{{ revision }}"
   pipelineSpec:
+    params:
+      - name: repo_url
+      - name: revision    
     tasks:
       - name: noop-task
         taskSpec:
@@ -27,6 +30,8 @@ spec:
               image: ubuntu
               script: |
                 #! /bin/bash
+                echo $(params.revision)
+                echo $(params.repo_url)
                 echo {{ company }}
                 sleep 20
                 exit 0
