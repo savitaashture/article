@@ -2,7 +2,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  generateName: article-pr-filechange
+  generateName: article-pr-filechange-
   annotations:
     # pipelinesascode.tekton.dev/on-event: "[push]"
     pipelinesascode.tekton.dev/on-event: "[incoming]"
