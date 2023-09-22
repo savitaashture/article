@@ -8,8 +8,8 @@ metadata:
     pipelinesascode.tekton.dev/on-target-branch: "[main]"
     # checking
     pipelinesascode.tekton.dev/max-keep-runs: "2"
-    # pipelinesascode.tekton.dev/task: "https://github.com/savitaashture/article/tree/%23test%2Furl/.tekton/task.yaml"
-    pipelinesascode.tekton.dev/task: "https://github.com/savitaashture/article/blob/a%2Fb%2Ftest-jira-issue/.tekton/task.yaml"
+    pipelinesascode.tekton.dev/task: "https://github.com/savitaashture/article/blob/%23test%2Furl/.tekton/task.yaml"
+    # pipelinesascode.tekton.dev/task: "https://github.com/savitaashture/article/blob/a%2Fb%2Ftest-jira-issue/.tekton/task.yaml"
 spec:
   pipelineSpec:
     tasks:
