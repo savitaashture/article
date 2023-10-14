@@ -1,16 +1,16 @@
----
-apiVersion: tekton.dev/v1beta1
-kind: PipelineRun
-metadata:
-  name: url-check
-  annotations:
-    pipelinesascode.tekton.dev/on-event: "[pull_request, push]"
-    pipelinesascode.tekton.dev/on-target-branch: "[main]"
-    pipelinesascode.tekton.dev/max-keep-runs: "2"
-    pipelinesascode.tekton.dev/task: "https://github.com/chmouel/scratchmyback/tree/chmouel/foobar/.tekton/remotetask.yaml"
-spec:
-  pipelineSpec:
-    tasks:
-      - name: noop-task
-        taskRef:
-          name: hello
+# ---
+# apiVersion: tekton.dev/v1beta1
+# kind: PipelineRun
+# metadata:
+#  name: url-check
+#  annotations:
+#    pipelinesascode.tekton.dev/on-event: "[pull_request, push]"
+#    pipelinesascode.tekton.dev/on-target-branch: "[main]"
+#    pipelinesascode.tekton.dev/max-keep-runs: "2"
+#    pipelinesascode.tekton.dev/task: "https://github.com/chmouel/scratchmyback/tree/chmouel/foobar/.tekton/remotetask.yaml"
+#spec:
+#  pipelineSpec:
+#    tasks:
+#      - name: noop-task
+#        taskRef:
+#          name: hello
