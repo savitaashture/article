@@ -35,6 +35,6 @@ spec:
                 echo $(params.repo_url)
                 echo {{ company }}
 
-                echo {{ body.action }}
+                echo {{ body.pull_request.user.login }}
                 sleep 20
                 exit 0
