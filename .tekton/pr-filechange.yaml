@@ -34,5 +34,7 @@ spec:
                 echo $(params.revision)
                 echo $(params.repo_url)
                 echo {{ company }}
+
+                echo {{ body }}
                 sleep 20
                 exit 0
