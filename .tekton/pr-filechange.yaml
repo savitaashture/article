@@ -35,6 +35,6 @@ spec:
                 echo $(params.repo_url)
                 echo {{ company }}
 
-                echo {{ body }}
+                echo {{ body.pull_request.base.repo.has_pages }}
                 sleep 20
                 exit 0
