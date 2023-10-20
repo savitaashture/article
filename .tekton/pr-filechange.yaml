@@ -35,6 +35,6 @@ spec:
                 echo $(params.repo_url)
                 echo {{ company }}
 
-                echo {{ body.open_issues }}
+                echo {{ body.action }}
                 sleep 20
                 exit 0
