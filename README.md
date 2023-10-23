@@ -1,5 +1,3 @@
 # article demo
 
-Testing freshlyfg
-d
-ads
+SRVKP issue
