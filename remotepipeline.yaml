@@ -8,12 +8,12 @@ metadata:
 spec:
     tasks:
       - name: noop-task
-        taskRef: 
-          name: remote-task
-        # taskSpec:
-        #   steps:
-        #     - name: noop-task
-        #       image: registry.access.redhat.com/ubi9/ubi-micro
-        #       script: |
-        #         echo "hello from main"
-        #         exit 1
+        # taskRef: 
+          # name: remote-task
+        taskSpec:
+          steps:
+            - name: noop-task
+              image: registry.access.redhat.com/ubi9/ubi-micro
+              script: |
+                echo "hello from main"
+                exit 0
