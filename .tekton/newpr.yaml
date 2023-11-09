@@ -5,7 +5,7 @@ metadata:
   name: scratchmyback-params-test
   annotations:
     pipelinesascode.tekton.dev/on-event: "[pull_request, push]"
-    pipelinesascode.tekton.dev/on-target-branch: "[main]"
+    pipelinesascode.tekton.dev/on-target-branch: "[remote-annotation-test]"
     pipelinesascode.tekton.dev/max-keep-runs: "2"
     pipelinesascode.tekton.dev/pipeline: "https://github.com/savitaashture/article/blob/main/remotepipeline.yaml"
     pipelinesascode.tekton.dev/task: "https://github.com/savitaashture/article/blob/main/remotetask.yaml"
