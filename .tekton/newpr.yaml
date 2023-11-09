@@ -1,0 +1,19 @@
+---
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: scratchmyback-params-test
+  annotations:
+    pipelinesascode.tekton.dev/on-event: "[pull_request, push]"
+    pipelinesascode.tekton.dev/on-target-branch: "[main]"
+    pipelinesascode.tekton.dev/max-keep-runs: "2"
+    pipelinesascode.tekton.dev/pipeline: "https://github.com/savitaashture/article/blob/main/remotepipeline.yaml"
+    pipelinesascode.tekton.dev/task: "https://github.com/savitaashture/article/blob/main/remotetask.yaml"
+spec:
+  params:
+    - name: repo_url
+      value: "{{ repo_url }}"
+    - name: revision
+      value: "{{ revision }}"
+  pipelineRef:
+    name: remote-pipeline
