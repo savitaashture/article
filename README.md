@@ -1,3 +1,3 @@
 # article demo
 
-testing gitops comments for push
+testing gitops comments for push request
